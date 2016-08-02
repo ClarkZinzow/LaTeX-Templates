@@ -1,0 +1,240 @@
+\documentclass[twoside, titlepage]{amsart}
+
+\newcommand{\authorName}{Clark Zinzow}  % Author's name.
+\newcommand{\bookName}{Booky McBookface}  % Book name.
+\newcommand{\bookEdition}{1st}
+\newcommand{\sectionType}{Chapter} % Type of section (chapter, section, etc.)
+\newcommand{\sectionNumber}{1} % Chapter or section that problems are from.
+\newcommand{\startDate}{\today}
+\newcommand{\bookAuthor}{Johnny Authorman}  % Book author's name.
+\newcommand{\universityName}{University of Wisconsin-Madison}
+\newcommand{\authorEmail}{czinzow@wisc.edu}  % Author's e-mail.
+
+% Basic amsthm definitions
+
+% Styles:
+%   - plain:  italic text, extra space above and below;
+%   - definition:  upright text, extra space above and below;
+%   - remark:  upright text, no extra space above and below.
+
+% plain style
+\theoremstyle{plain} % default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{crit}[thm]{Criterion}
+\newtheorem{assrt}[thm]{Assertion}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{fact}[thm]{Fact}
+
+% definition style
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{condition}{Condition}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{property}{Property}[section]
+\newtheorem{assump}{Assumption}[section]
+\newtheorem{hypoth}{Hypothesis}[section]
+\newtheorem{ques}{Question}[section]
+\newtheorem{xca}[exmp]{Exercise}
+
+% remark style
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{clm}{Claim}
+\newtheorem*{summary}{Summary}
+\newtheorem*{acknowl}{Acknowledgments}
+\newtheorem*{concl}{Conclusion}
+\newtheorem*{case}{Case}
+
+\newtheoremstyle{notation}
+{}
+{}
+{}
+{}
+{\itshape}
+{:}
+{\newline}
+{}
+\theoremstyle{notation}
+\newtheorem*{notation}{Notation}
+
+% Proof workaround:  The proof environment is defined as a LaTeX list, so a 
+% substitute ``name" that is longer than one output line will not break as it
+% should.  The following is a preamble hack until amsthm fixes this.
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item\relax
+	{\itshape
+		#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage[section]{placeins}
+\usepackage{array}
+\usepackage{nicefrac}
+\usepackage{listings}
+\usepackage{parskip}
+\usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
+%        processed floats, not \clearpage.
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage{dsfont}
+\usepackage{mdwlist}
+\usepackage{underscore}
+\usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
+
+% Todo notes commands.
+\newcommand{\unfinished}[1]{\todo[inline, color=red!40]{#1}}
+\newcommand{\argcheck}[1]{\todo[inline, color=orange!40]{#1}}
+\newcommand{\needprove}[1]{\todo[inline, color=violet!40]{#1}}
+\newcommand{\detail}[1]{\todo[inline, color=blue!40]{#1}}
+\newcommand{\insertref}[1]{\todo[inline, color=green!40]{#1}}
+\newcommand{\badnotation}[1]{\todo[inline, color=yellow!40]{#1}}
+\newcommand{\further}[1]{\todo[inline, color=cyan!40]{#1}}
+
+\newcommand{\ses}[3]{%
+	\begin{tikzcd}[ampersand replacement=\&]
+		0 \arrow[r] \& #1 \arrow[r] \& #2 \arrow[r] \& #3 \arrow[r] \& 0
+	\end{tikzcd}%
+}
+\newcommand{\sesm}[5]{%
+	\begin{tikzcd}[ampersand replacement=\&]
+		0 \arrow[r] \& #1 \arrow[r, "#4"] \& #2 \arrow[r, "#5"] \& #3 \arrow[r] \& 0
+	\end{tikzcd}%
+}
+\newcommand{\suchthat}{\: \big\rvert \:}
+\newcommand{\suchthatBig}{\: \Big\rvert \:}
+\newcommand{\suchthathuge}{\: \huge\rvert \:}
+
+% Subject specific commands.
+
+
+
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		\vspace*{\baselineskip}
+		\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+		\rule{\textwidth}{0.4pt}\\[\baselineskip]
+		{\Huge Solutions to Exercises from \\ \sectionType \:\sectionNumber \:of \\[0.2\baselineskip] \emph{\bookName}
+		}\\[0.2\baselineskip]
+		\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{3pt}
+		\rule{\textwidth}{1.6pt}\\[\baselineskip]
+		\vspace*{3\baselineskip}
+		\huge  \par
+		\vspace*{\baselineskip}
+		{\itshape \universityName \par}
+		\vspace*{3\baselineskip}
+		\huge \textbf{Author of Solutions:} { \authorName} \\
+		\vspace*{\baselineskip}
+		\huge \textbf{Date Edited:} { \startDate } \par
+		\vspace*{\baselineskip}
+		\huge \textbf{Text:} { \emph{\bookName,  \bookEdition \:Ed.}} \\
+		\vspace*{\baselineskip}
+		\huge \textbf{Author of Text:} { \bookAuthor } \par
+		\vspace*{\baselineskip}
+		\huge \textbf{Contact:} { \authorEmail } \\
+	\end{titlepage}
+	
+	\makeatletter
+	\providecommand\@dotsep{5}
+	\makeatother
+	\listoftodos\relax
+	
+	\clearpage
+	
+	This is a set of solutions, created by \authorName, to the \sectionType \:\sectionNumber \:exercises from the text \emph{\bookName, \bookEdition \:Ed.} by \bookAuthor.
+	\hspace{0pt} \\
+	
+	\section*{Notation:}
+	We use the following non-standard notation:
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+	\section*{Acknowledgments:}
+	Thank you to the following people for helping me, in some way, with these solutions:
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+	\clearpage
+	
+	\section*{Exercise 1}
+	\stepcounter{section}
+	
+		
+	
+	\begin{proof}
+		
+		
+		
+	\end{proof}
+	
+	\clearpage
+	
+	\section*{Exercise 2}
+	\stepcounter{section}
+	
+		
+	
+	\begin{proof}
+		
+		
+		
+	\end{proof}
+	
+	\clearpage
+	
+	% Alpha bibliography style.  Make second argument to thebigliography environment the largest largest explicit label used.
+	\begin{thebibliography}{"Graf08"}
+		\bibitem[Fol99]{folland99}
+		Gerald B. Folland,
+		\emph{Real Analysis: Modern Techniques and Their Applications},
+		Wiley,
+		2nd Edition,
+		1999.
+		\bibitem[Graf08]{grafakos08}
+		Loukas Grafakos,
+		\emph{Classical Fourier Analysis},
+		Springer,
+		2nd Edition,
+		2008.
+		\bibitem[Rud86]{rudin86}
+		Walter Rudin,
+		\emph{Real and Complex Analysis},
+		McGraw-Hill Education,
+		3rd Edition,
+		1986.
+		\bibitem[Rud91]{rudin91}
+		Walter Rudin,
+		\emph{Functional Analysis},
+		McGraw-Hill Science/Engineering/Math,
+		2nd Edition,
+		1991.
+		\bibitem[HR63]{hewittross63}
+		Edwin Hewitt and Kenneth A. Ross,
+		\emph{Abstract Harmonic Analysis},
+		Springer,
+		1st Edition,
+		1963.
+	\end{thebibliography}
+	
+\end{document}
