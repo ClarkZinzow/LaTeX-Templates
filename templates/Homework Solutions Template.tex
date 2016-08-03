@@ -1,6 +1,10 @@
+% Basic homework solutions template.
+%
+% By Clark Zinzow
+
 \documentclass[twoside, titlepage]{amsart}
 
-% Insert your details here!
+%  Make sure these parameters are set to what you want!
 \newcommand{\authorName}{Clark Zinzow}  % Author's name.
 \newcommand{\homeworkNumber}{1}  % Homework number.
 \newcommand{\subject}{Subject}  % Subject.
@@ -11,14 +15,14 @@
 \newcommand{\universityName}{University of Wisconsin-Madison}  % University.
 \newcommand{\authorEmail}{czinzow@wisc.edu}  % Author's e-mail.
 
-% Basic amsthm definitions
+%  Basic amsthm definitions
 
-% Styles:
+%  Styles:
 %   - plain:  italic text, extra space above and below;
 %   - definition:  upright text, extra space above and below;
 %   - remark:  upright text, no extra space above and below.
 
-% plain style
+%  Plain style
 \theoremstyle{plain} % default
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
@@ -29,7 +33,7 @@
 \newtheorem*{cor}{Corollary}
 \newtheorem{fact}[thm]{Fact}
 
-% definition style
+%  Definition style
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{condition}{Condition}[section]
@@ -42,7 +46,7 @@
 \newtheorem{ques}{Question}[section]
 \newtheorem{xca}[exmp]{Exercise}
 
-% remark style
+%  Remark style
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
@@ -64,9 +68,33 @@
 \theoremstyle{notation}
 \newtheorem*{notation}{Notation}
 
-% Proof workaround:  The proof environment is defined as a LaTeX list, so a 
-% substitute ``name" that is longer than one output line will not break as it
-% should.  The following is a preamble hack until amsthm fixes this.
+%  Packages
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage[section]{placeins}
+\usepackage{array}
+\usepackage{nicefrac}
+\usepackage{parskip}
+\usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
+                       %        processed floats, not \clearpage.
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{fancyhdr}
+\usepackage{dsfont}
+\usepackage{mdwlist}
+\usepackage{underscore}
+\usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
+
+%  Subject specific packages
+%\usepackage{tikz-cd}  % Great for commutative diagrams.
+%\usepackage{bm}  % Great for bold vectors.
+%\usepackage{listings}  % Great for source code.
+
+%  Proof workaround:  The proof environment is defined as a LaTeX list, so a 
+%  substitute ``name" that is longer than one output line will not break as it
+%  should.  The following is a preamble hack until amsthm fixes this.
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par
 	\pushQED{\qed}%
@@ -80,31 +108,7 @@
 }
 \makeatother
 
-% Packages
-\usepackage{mathrsfs}
-\usepackage{amssymb,amsmath,amsthm}
-\usepackage{enumerate}
-\usepackage[margin=1in]{geometry}
-\usepackage{verbatim}
-\usepackage[section]{placeins}
-\usepackage{array}
-\usepackage{nicefrac}
-\usepackage{parskip}
-\usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
-%        processed floats, not \clearpage.
-\usepackage[colorinlistoftodos]{todonotes}
-\usepackage{fancyhdr}
-\usepackage{dsfont}
-\usepackage{mdwlist}
-\usepackage{underscore}
-\usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
-
-% Subject specific packages
-% \usepackage{tikz-cd}  % Great for commutative diagrams.
-% \usepackage{bm}  % Great for bold vectors.
-% \usepackage{listings}  % Great for source code.
-
-% Todo notes commands, color-coded to type of todo.
+%  Todo notes commands, color-coded to type of todo.
 \newcommand{\unfinished}[1]{\todo[inline, color=red!40]{#1}}
 \newcommand{\argcheck}[1]{\todo[inline, color=orange!40]{#1}}
 \newcommand{\needprove}[1]{\todo[inline, color=violet!40]{#1}}
@@ -113,12 +117,12 @@
 \newcommand{\badnotation}[1]{\todo[inline, color=yellow!40]{#1}}
 \newcommand{\further}[1]{\todo[inline, color=cyan!40]{#1}}
 
-% Such that symbol command.
+%  Such that symbol commands.
 \newcommand{\suchthat}{\: \big\rvert \:}
 \newcommand{\suchthatBig}{\: \Big\rvert \:}
 \newcommand{\suchthathuge}{\: \huge\rvert \:}
 
-% Subject specific commands.
+%  Subject specific commands.
 
 %\renewcommand{\Re}{\operatorname{Re}}
 %\renewcommand{\Im}{\operatorname{Im}}

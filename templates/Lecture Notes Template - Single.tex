@@ -1,4 +1,4 @@
-% Basic lecture notes template.
+% Basic lecture notes template for a single lecture.
 %
 % By Clark Zinzow
 
@@ -6,40 +6,27 @@
 
 %  Make sure these parameters are set to what you want!
 \newcommand{\authorName}{Clark Zinzow}  % Author's name.
-\newcommand{\className}{Subject 101: Introduction to Intermediate}  % Course name.
+\newcommand{\subject}{Subject}  % Subject.
+\newcommand{\courseNumber}{101}  % Course number.
+\newcommand{\courseName}{Introduction to Intermediate}  % Course name.
 \newcommand{\instName}{Professor Professorson}  % Instructor's name.
-\newcommand{\semester}{Fall/Spring \the\year}  % Semester in which the class took place.
-\newcommand{\universityName}{University of Wisconsin-Madison}
+\newcommand{\semester}{Fall/Spring \the\year}  % Semester class taken.
+\newcommand{\universityName}{University of Wisconsin-Madison}  % University.
 \newcommand{\authorEmail}{czinzow@wisc.edu}  % Author's e-mail.
 
-%  New parameters, since we're dealing with a single lecture.
+%  Single lecture parameters.
 \newcommand{\lectureNum}{1}  % Lecture number.
 \newcommand{\lectureTopic}{Topic of Lecture}  % Lecture topic.
-\newcommand{\lectureDate}{October 29th, 2015}  % Lecture date.
+\newcommand{\lectureDate}{\today}  % Lecture date.
 
-%  Packages.
-\usepackage{mathrsfs}
-\usepackage{amssymb,amsmath,amsthm}
-\usepackage{enumerate}
-\usepackage[margin=1in]{geometry}
-\usepackage{verbatim}
-\usepackage[section]{placeins}
-\usepackage{array}
-\usepackage{nicefrac}
-\usepackage{listings}
-\usepackage{parskip}
-\usepackage{graphicx}
-\usepackage{placeins}
-\usepackage{todonotes}
+%  Basic amsthm definitions
 
-% Basic amsthm definitions
-
-% Styles:
+%  Styles:
 %   - plain:  italic text, extra space above and below;
 %   - definition:  upright text, extra space above and below;
 %   - remark:  upright text, no extra space above and below.
 
-% plain style
+%  Plain style
 \theoremstyle{plain} % default
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
@@ -50,7 +37,7 @@
 \newtheorem*{cor}{Corollary}
 \newtheorem{fact}[thm]{Fact}
 
-% definition style
+%  Definition style
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{condition}{Condition}[section]
@@ -63,7 +50,7 @@
 \newtheorem{ques}{Question}[section]
 \newtheorem{xca}[exmp]{Exercise}
 
-% remark style
+%  Remark style
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
@@ -74,9 +61,33 @@
 \newtheorem*{concl}{Conclusion}
 \newtheorem*{case}{Case}
 
-% Proof workaround:  The proof environment is defined as a LaTeX list, so a substitute ``name"
-% that is longer than one output line will not break as it should.  The following is a
-% preamble hack until amsthm fixes this.
+%  Packages
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage[section]{placeins}
+\usepackage{array}
+\usepackage{nicefrac}
+\usepackage{parskip}
+\usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
+                       %        processed floats, not \clearpage.
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{fancyhdr}
+\usepackage{dsfont}
+\usepackage{mdwlist}
+\usepackage{underscore}
+\usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
+
+%  Subject specific packages
+%\usepackage{tikz-cd}  % Great for commutative diagrams.
+%\usepackage{bm}  % Great for bold vectors.
+\usepackage{listings}  % Great for source code.
+
+%  Proof workaround:  The proof environment is defined as a LaTeX list, so a 
+%  substitute ``name" that is longer than one output line will not break as it
+%  should.  The following is a preamble hack until amsthm fixes this.
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par
 	\pushQED{\qed}%
@@ -90,27 +101,31 @@
 }
 \makeatother
 
-%  In text citations macro.
-%  Usage:  \cite{***last name initial of each author, year published***}
-%  Ex:  \cite{S96} for Peter Shor's 1996 paper "Polynomial-Time Algorithms for Prime
-%         Factorization and Discrete Logarithms on a Quantum Computer"
-%  Ex:  \cite{KMP77} for "Fast pattern matching in strings" by Donald Knuth, James H. Morris
-%         and Vaughan Pratt.
-%  Ex:  \cite{P03} for Grisha Perelman's 2003 paper "Finite extinction time for the solutions to
-%         the Ricci flow on certain three-manifolds".
-\renewcommand{\cite}[1]{[#1]}
-\def\beginrefs{\begin{list}%
-		{[\arabic{equation}]}{\usecounter{equation}
-			\setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
-			\setlength{\labelwidth}{1.6truecm}}}
-	\def\endrefs{\end{list}}
-\def\bibentry#1{\item[\hbox{[#1]}]}
-
 %  Suppresses indents.
 \newlength{\tindent}
 \setlength{\tindent}{\parindent}
 \setlength{\parindent}{0pt}
 \renewcommand{\indent}{\hspace*{\tindent}}
+
+%  Todo notes commands, color-coded to type of todo.
+\newcommand{\unfinished}[1]{\todo[inline, color=red!40]{#1}}
+\newcommand{\argcheck}[1]{\todo[inline, color=orange!40]{#1}}
+\newcommand{\needprove}[1]{\todo[inline, color=violet!40]{#1}}
+\newcommand{\detail}[1]{\todo[inline, color=blue!40]{#1}}
+\newcommand{\insertref}[1]{\todo[inline, color=green!40]{#1}}
+\newcommand{\badnotation}[1]{\todo[inline, color=yellow!40]{#1}}
+\newcommand{\further}[1]{\todo[inline, color=cyan!40]{#1}}
+
+%  Such that symbol commands.
+\newcommand{\suchthat}{\: \big\rvert \:}
+\newcommand{\suchthatBig}{\: \Big\rvert \:}
+\newcommand{\suchthathuge}{\: \huge\rvert \:}
+
+%  Subject specific commands.
+
+%\renewcommand{\Re}{\operatorname{Re}}
+%\renewcommand{\Im}{\operatorname{Im}}
+%\DeclareMathOperator*{\prob}{Pr}
 
 \title{Lectures Notes for \className}
 \author{\authorName}
@@ -119,7 +134,6 @@
 
 \begin{document}
 	
-	%\lstset{language=Matlab}
 	\lstset{
 		basicstyle=\ttfamily,
 		columns=flexible,
@@ -131,7 +145,7 @@
 	\begin{center}
 		\framebox{
 			\vbox{\vspace{2mm}
-				\hbox to 6.28in { {\large \className
+				\hbox to 6.28in { {\large \subject\ \courseNumber: \courseName
 							\hfill \semester} }
 				\vspace{4mm}
 				\hbox to 6.28in { {\huge \bf \hfill Lecture \lectureNum: \lectureTopic  \hfill} }
@@ -205,8 +219,37 @@
 	
 	\clearpage 
 	
-	\section{new stuff}
+	\section{More stuff!}
 	
 	\subsection{blah}
+	
+	Neat-o!
+	
+	\begin{itemize}
+		\item Oh no.
+		\item You're live-TeXing your lecture notes.
+		\item The professor is talking really fast.
+		\item No time to organize your notes into neat sections, subsections, and subsubsections!
+		\item Good thing you can just create an unordered list like this...
+		\begin{itemize}
+			\item and have nested lists as well!
+			\item Look at that hierarchical structure!
+		\end{itemize}
+		\item I'd say that's pretty neat.
+	\end{itemize}
+	
+	\clearpage
+	
+	% Alpha bibliography style.  Make second argument to thebigliography environment the largest largest explicit label used.
+	\begin{thebibliography}{"McAuthorface16"}
+		\bibitem{realbook16}
+		Writey McAuthorface,
+		\emph{Introduction to Advanced Intermediate: For Beginning Experts},
+		Publishy McPressface,
+		10th Edition,
+		2016.
+	\end{thebibliography}
+	
+	\vfill  % Pushes e-mail to bottom of reference page.
 	
 \end{document}

@@ -6,22 +6,22 @@
 
 %  Make sure these parameters are set to what you want!
 \newcommand{\authorName}{Clark Zinzow}  % Author's name.
-\newcommand{\subject}{Math}  % Subject.
-\newcommand{\courseNumber}{999}  % Course number.
+\newcommand{\subject}{Subject}  % Subject.
+\newcommand{\courseNumber}{101}  % Course number.
 \newcommand{\courseName}{Introduction to Intermediate}  % Course name.
 \newcommand{\instName}{Professor Professorson}  % Instructor's name.
-\newcommand{\semester}{Fall/Spring \the\year}  % Semester in which the class took place.
+\newcommand{\semester}{Fall/Spring \the\year}  % Semester class taken.
 \newcommand{\universityName}{University of Wisconsin-Madison}  % University.
 \newcommand{\authorEmail}{czinzow@wisc.edu}  % Author's e-mail.
 
-% Basic amsthm definitions
+%  Basic amsthm definitions
 
-% Styles:
+%  Styles:
 %   - plain:  italic text, extra space above and below;
 %   - definition:  upright text, extra space above and below;
 %   - remark:  upright text, no extra space above and below.
 
-% plain style
+%  Plain style
 \theoremstyle{plain} % default
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
@@ -32,7 +32,7 @@
 \newtheorem*{cor}{Corollary}
 \newtheorem{fact}[thm]{Fact}
 
-% definition style
+%  Definition style
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{condition}{Condition}[section]
@@ -45,7 +45,7 @@
 \newtheorem{ques}{Question}[section]
 \newtheorem{xca}[exmp]{Exercise}
 
-% remark style
+%  Remark style
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
@@ -67,9 +67,9 @@
 \theoremstyle{notation}
 \newtheorem*{notation}{Notation}
 
-% Proof workaround:  The proof environment is defined as a LaTeX list, so a 
-% substitute ``name" that is longer than one output line will not break as it
-% should.  The following is a preamble hack until amsthm fixes this.
+%  Proof workaround:  The proof environment is defined as a LaTeX list, so a 
+%  substitute ``name" that is longer than one output line will not break as it
+%  should.  The following is a preamble hack until amsthm fixes this.
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par
 	\pushQED{\qed}%
@@ -83,6 +83,7 @@
 }
 \makeatother
 
+%  Packages
 \usepackage{mathrsfs}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{enumerate}
@@ -91,20 +92,22 @@
 \usepackage[section]{placeins}
 \usepackage{array}
 \usepackage{nicefrac}
-\usepackage{listings}
 \usepackage{parskip}
 \usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
-%        processed floats, not \clearpage.
+                       %        processed floats, not \clearpage.
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage{tikz-cd}
 \usepackage{fancyhdr}
-\usepackage{bm}
 \usepackage{dsfont}
 \usepackage{mdwlist}
 \usepackage{underscore}
 \usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
 
-% Todo notes commands.
+%  Subject specific packages
+%\usepackage{tikz-cd}  % Great for commutative diagrams.
+%\usepackage{bm}  % Great for bold vectors.
+\usepackage{listings}  % Great for source code.
+
+%  Todo notes commands, color-coded to type of todo.
 \newcommand{\unfinished}[1]{\todo[inline, color=red!40]{#1}}
 \newcommand{\argcheck}[1]{\todo[inline, color=orange!40]{#1}}
 \newcommand{\needprove}[1]{\todo[inline, color=violet!40]{#1}}
@@ -133,7 +136,7 @@
 	\begin{center}
 		\framebox{
 			\vbox{\vspace{2mm}
-				\hbox to 6.28in { {\large \subject\:\courseNumber: \courseName
+				\hbox to 6.28in { {\large \subject\ \courseNumber: \courseName
 						\hfill #3} }
 				\vspace{4mm}
 				\hbox to 6.28in { {\huge \hfill \textbf{Lecture #1:} \parbox{4in}{\centering \textbf{#2}} \hfill } }
@@ -147,143 +150,248 @@
 	\vspace*{4mm}
 }
 
-%  In text citations macro.
-%  Usage:  \cite{***last name initial of each author, year published***}
-%  Ex:  \cite{S96} for Peter Shor's 1996 paper "Polynomial-Time Algorithms for Prime
-%         Factorization and Discrete Logarithms on a Quantum Computer"
-%  Ex:  \cite{KMP77} for "Fast pattern matching in strings" by Donald Knuth, James H. Morris
-%         and Vaughan Pratt.
-%  Ex:  \cite{P03} for Grisha Perelman's 2003 paper "Finite extinction time for the solutions to
-%         the Ricci flow on certain three-manifolds".
-\renewcommand{\cite}[1]{[#1]}
-\def\beginrefs{\begin{list}%
-		{[\arabic{equation}]}{\usecounter{equation}
-			\setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
-			\setlength{\labelwidth}{1.6truecm}}}
-	\def\endrefs{\end{list}}
-\def\bibentry#1{\item[\hbox{[#1]}]}
-
 %  Suppresses indents.
 \newlength{\tindent}
 \setlength{\tindent}{\parindent}
 \setlength{\parindent}{0pt}
 \renewcommand{\indent}{\hspace*{\tindent}}
 
-\newcommand{\morph}{\longrightarrow}
-\newcommand{\lmorph}{\longleftarrow}
-\newcommand{\morpha}[1]{\overset{#1}{\morph}}
-\newcommand{\lmorpha}[1]{\overset{#1}{\lmorph}}
-\newcommand{\ses}[3]{%
-	\begin{tikzcd}[ampersand replacement=\&]
-		0 \arrow[r] \& #1 \arrow[r] \& #2 \arrow[r] \& #3 \arrow[r] \& 0
-	\end{tikzcd}%
-}
-\newcommand{\sesm}[5]{%
-	\begin{tikzcd}[ampersand replacement=\&]
-		0 \arrow[r] \& #1 \arrow[r, "#4"] \& #2 \arrow[r, "#5"] \& #3 \arrow[r] \& 0
-	\end{tikzcd}%
-}
+%  Such that symbol commands.
 \newcommand{\suchthat}{\: \big\rvert \:}
 \newcommand{\suchthatBig}{\: \Big\rvert \:}
 \newcommand{\suchthathuge}{\: \huge\rvert \:}
-\renewcommand{\Re}{\operatorname{Re}}
-\renewcommand{\Im}{\operatorname{Im}}
-\DeclareMathOperator*{\prob}{Pr}
 
-% Subject specific commands.
+%  Subject specific commands.
 
-
-
+%\renewcommand{\Re}{\operatorname{Re}}
+%\renewcommand{\Im}{\operatorname{Im}}
+%\DeclareMathOperator*{\prob}{Pr}
 
 \begin{document}
 	
-\begin{titlepage}
-	\centering
-	\vspace*{\baselineskip}
-	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
-	\rule{\textwidth}{0.4pt}\\[\baselineskip]
-	{\Huge Lecture Notes\\ for \\[0.4\baselineskip]
-		\subject\:\courseNumber: \courseName
-	}\\[0.2\baselineskip]
-	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{3pt}
-	\rule{\textwidth}{1.6pt}\\[\baselineskip]
-	\vspace*{3\baselineskip}
-	\huge {\itshape \universityName \par}
-	\vspace*{\baselineskip}
-	\semester \par
-	\vspace*{3\baselineskip}
-	\begin{minipage}{0.4\textwidth}
-		\begin{flushleft}
-			\begin{center}
-				\huge \textbf{Instructor:}  \\[\baselineskip]
-				{ \instName}	
-			\end{center}		
-		\end{flushleft}
-	\end{minipage}
-	\begin{minipage}{0.4\textwidth}
-		\begin{flushright}
-			\begin{center}
-				\huge \textbf{Author:} \\[\baselineskip]
-				{ \authorName}
-			\end{center}
-		\end{flushright}
-	\end{minipage}\\
-	\vfill
-	%  Contact if errors are found disclaimer.
-	{ If you find any errors in these notes, please e-mail me at \authorEmail. \par}
-\end{titlepage}
-
-This is a set of lecture notes for \subject\:\courseNumber: \courseName.
-\hspace{0pt} \\
-
-\section*{Notation:}
-We use the following non-standard notation:
-\begin{itemize}
-	\item 
-\end{itemize}
-
-\section*{Acknowledgments:}
-Thank you to the following people for helping me, in some way, with these solutions:
-\begin{itemize}
-	\item 
-\end{itemize}
-
-\lecture{1}{Topic of First Lecture}{\today}
-
-\section{Section 1}
-
-
-
-\subsection*{Subsection 1}
-
-
-
-\subsubsection*{Subsubsection 1}
-
-
-
-\subsection*{Subsection 2}
-
-
-
-\section{Section 2}
-
-
-
-\section{Section 3}
-
-
-
-\clearpage
-
-% Alpha bibliography style.  Make second argument to thebigliography environment the largest largest explicit label used.
-\begin{thebibliography}{"Fol99"}
-	\bibitem[Fol99]{folland99}
-	Gerald B. Folland,
-	\emph{Real Analysis: Modern Techniques and Their Applications},
-	Wiley,
-	2nd Edition,
-	1999.	
-\end{thebibliography}
+	\begin{titlepage}
+		\centering
+		\vspace*{\baselineskip}
+		\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+		\rule{\textwidth}{0.4pt}\\[\baselineskip]
+		{\Huge Lecture Notes\\ for \\[0.4\baselineskip]
+			\subject\ \courseNumber: \courseName
+		}\\[0.2\baselineskip]
+		\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{3pt}
+		\rule{\textwidth}{1.6pt}\\[\baselineskip]
+		\vspace*{3\baselineskip}
+		\huge {\itshape \universityName \par}
+		\vspace*{\baselineskip}
+		\semester \par
+		\vspace*{3\baselineskip}
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushleft}
+				\begin{center}
+					\huge \textbf{Instructor:}  \\[\baselineskip]
+					{ \instName}	
+				\end{center}		
+			\end{flushleft}
+		\end{minipage}
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushright}
+				\begin{center}
+					\huge \textbf{Author:} \\[\baselineskip]
+					{ \authorName}
+				\end{center}
+			\end{flushright}
+		\end{minipage}\\
+		\vfill
+		%  Contact if errors are found disclaimer.
+		{ If you find any errors in these notes, please e-mail me at \authorEmail. \par}
+	\end{titlepage}
+	
+	This is a set of lecture notes for \subject\ \courseNumber: \courseName, taught at \universityName\ by \instName\ in \semester.
+	\hspace{0pt} \\
+	
+	\section*{Notation:}
+	We use the following non-standard notation:
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+	\section*{Acknowledgments:}
+	Thank you to the following people for helping me, in some way, with these lecture notes:
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+	\lecture{1}{Topic of First Lecture}{\today}
+	
+	\section{Subtopic Section 1}
+	
+	Text text text.  
+	
+	\begin{defn}
+		Let the the \emph{intermediacy} of the topic be denoted by $\alpha$.
+	\end{defn}
+	
+	\begin{rem}
+		Note that ``intermediacy" is not a word.
+	\end{rem}
+	
+	\begin{note}
+		Note we are noting something in the above remark.  One could claim that it is actually a note.
+	\end{note}
+	
+	Lorem ipsum whatever.
+	
+	\begin{thm}
+		$x - y = 0 \iff y - x = 0$.
+	\end{thm}
+	\begin{proof}
+		$x - y = 0 \iff x = y \iff y = x \iff y - x = 0$ by the reflexivity of equality.
+	\end{proof}
+	
+	\subsection{Subsection 1}
+	
+	Text text text.
+	
+	\subsubsection{Subsubsection 1}
+	
+	Text text text.
+	
+	\subsubsection{Subsubsection 1}
+	
+	Text text text.
+	
+	\subsubsection{Subsubsection 1}
+	
+	Text text text.
+	
+	\subsection{Subsection 1}
+	
+	Text text text.
+	
+	\subsection{Subsection 1}
+	
+	Text text text.
+	
+	\section{Subtopic Section 1}
+	
+	Text text text.
+	
+	\subsection{Subsection 2}
+	
+	Text text text.
+	
+	\clearpage 
+	
+	\section{More stuff!}
+	
+	\subsection{blah}
+	
+	Neat-o!
+	
+	\begin{itemize}
+		\item Oh no.
+		\item You're live-TeXing your lecture notes.
+		\item The professor is talking really fast.
+		\item No time to organize your notes into neat sections, subsections, and subsubsections!
+		\item Good thing you can just create an unordered list like this...
+		\begin{itemize}
+			\item and have nested lists as well!
+			\item Look at that hierarchical structure!
+		\end{itemize}
+		\item I'd say that's pretty neat.
+	\end{itemize}
+			
+	\clearpage
+	
+	\lecture{2}{Topic of Second Lecture}{\today}
+	
+	\section{Subtopic Section 1}
+	
+	Text text text.  
+	
+	\begin{defn}
+		Let the the \emph{intermediacy} of the topic be denoted by $\alpha$.
+	\end{defn}
+	
+	\begin{rem}
+		Note that ``intermediacy" is not a word.
+	\end{rem}
+	
+	\begin{note}
+		Note we are noting something in the above remark.  One could claim that it is actually a note.
+	\end{note}
+	
+	Lorem ipsum whatever.
+	
+	\begin{thm}
+		$x - y = 0 \iff y - x = 0$.
+	\end{thm}
+	\begin{proof}
+		$x - y = 0 \iff x = y \iff y = x \iff y - x = 0$ by the reflexivity of equality.
+	\end{proof}
+	
+	\subsection{Subsection 1}
+	
+	Text text text.
+	
+	\subsubsection{Subsubsection 1}
+	
+	Text text text.
+	
+	\subsubsection{Subsubsection 1}
+	
+	Text text text.
+	
+	\subsubsection{Subsubsection 1}
+	
+	Text text text.
+	
+	\subsection{Subsection 1}
+	
+	Text text text.
+	
+	\subsection{Subsection 1}
+	
+	Text text text.
+	
+	\section{Subtopic Section 1}
+	
+	Text text text.
+	
+	\subsection{Subsection 2}
+	
+	Text text text.
+	
+	\clearpage 
+	
+	\section{More stuff!}
+	
+	\subsection{blah}
+	
+	Neat-o!
+	
+	\begin{itemize}
+		\item Oh no.
+		\item You're live-TeXing your lecture notes.
+		\item The professor is talking really fast.
+		\item No time to organize your notes into neat sections, subsections, and subsubsections!
+		\item Good thing you can just create an unordered list like this...
+		\begin{itemize}
+			\item and have nested lists as well!
+			\item Look at that hierarchical structure!
+		\end{itemize}
+		\item I'd say that's pretty neat.
+	\end{itemize}
+	
+	\clearpage
+	
+	% Alpha bibliography style.  Make second argument to thebigliography environment the largest largest explicit label used.
+	\begin{thebibliography}{"McAuthorface16"}
+		\bibitem{realbook16}
+		Writey McAuthorface,
+		\emph{Introduction to Advanced Intermediate: For Beginning Experts},
+		Publishy McPressface,
+		10th Edition,
+		2016.
+	\end{thebibliography}
 
 \end{document}
