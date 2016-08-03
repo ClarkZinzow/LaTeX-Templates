@@ -1,0 +1,387 @@
+\documentclass[twoside, titlepage]{amsart}
+
+% Insert your details here!
+\newcommand{\authorName}{Clark Zinzow}  % Author's name.
+\newcommand{\homeworkNumber}{1}  % Homework number.
+\newcommand{\subject}{Subject}  % Subject.
+\newcommand{\courseNumber}{101}  % Course number.
+\newcommand{\courseName}{Introduction to Intermediate}  % Course name.
+\newcommand{\instructor}{Professor Professorson}  % Name of lecturer.
+\newcommand{\submitDate}{\today}  % Date solutions last edited.
+\newcommand{\universityName}{University of Wisconsin-Madison}  % University.
+\newcommand{\authorEmail}{czinzow@wisc.edu}  % Author's e-mail.
+
+% Basic amsthm definitions
+
+% Styles:
+%   - plain:  italic text, extra space above and below;
+%   - definition:  upright text, extra space above and below;
+%   - remark:  upright text, no extra space above and below.
+
+% plain style
+\theoremstyle{plain} % default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{crit}[thm]{Criterion}
+\newtheorem{assrt}[thm]{Assertion}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{fact}[thm]{Fact}
+
+% definition style
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{condition}{Condition}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{property}{Property}[section]
+\newtheorem{assump}{Assumption}[section]
+\newtheorem{hypoth}{Hypothesis}[section]
+\newtheorem{ques}{Question}[section]
+\newtheorem{xca}[exmp]{Exercise}
+
+% remark style
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{clm}{Claim}
+\newtheorem*{summary}{Summary}
+\newtheorem*{acknowl}{Acknowledgments}
+\newtheorem*{concl}{Conclusion}
+\newtheorem*{case}{Case}
+
+\newtheoremstyle{notation}
+{}
+{}
+{}
+{}
+{\itshape}
+{:}
+{\newline}
+{}
+\theoremstyle{notation}
+\newtheorem*{notation}{Notation}
+
+% Proof workaround:  The proof environment is defined as a LaTeX list, so a 
+% substitute ``name" that is longer than one output line will not break as it
+% should.  The following is a preamble hack until amsthm fixes this.
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item\relax
+	{\itshape
+		#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% Packages
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage[section]{placeins}
+\usepackage{array}
+\usepackage{nicefrac}
+\usepackage{parskip}
+\usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
+%        processed floats, not \clearpage.
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{fancyhdr}
+\usepackage{dsfont}
+\usepackage{mdwlist}
+\usepackage{underscore}
+\usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
+
+% Subject specific packages
+\usepackage{tikz-cd}  % Great for commutative diagrams.
+\usepackage{bm}  % Easy bold vectors.
+\usepackage{listings}  % Great for source code.
+
+% Todo notes commands, color-coded to type of todo.
+\newcommand{\unfinished}[1]{\todo[inline, color=red!40]{#1}}
+\newcommand{\argcheck}[1]{\todo[inline, color=orange!40]{#1}}
+\newcommand{\needprove}[1]{\todo[inline, color=violet!40]{#1}}
+\newcommand{\detail}[1]{\todo[inline, color=blue!40]{#1}}
+\newcommand{\insertref}[1]{\todo[inline, color=green!40]{#1}}
+\newcommand{\badnotation}[1]{\todo[inline, color=yellow!40]{#1}}
+\newcommand{\further}[1]{\todo[inline, color=cyan!40]{#1}}
+
+% Such that symbol command.
+\newcommand{\suchthat}{\: \big\rvert \:}
+\newcommand{\suchthatBig}{\: \Big\rvert \:}
+\newcommand{\suchthathuge}{\: \huge\rvert \:}
+
+% Subject specific commands:
+
+\newcommand{\morph}{\longrightarrow}
+\newcommand{\lmorph}{\longleftarrow}
+\newcommand{\morpha}[1]{\overset{#1}{\morph}}
+\newcommand{\lmorpha}[1]{\overset{#1}{\lmorph}}
+\newcommand{\ses}[3]{%
+	\begin{tikzcd}[ampersand replacement=\&]
+		0 \arrow[r] \& #1 \arrow[r] \& #2 \arrow[r] \& #3 \arrow[r] \& 0
+	\end{tikzcd}%
+}
+\newcommand{\sesm}[5]{%
+	\begin{tikzcd}[ampersand replacement=\&]
+		0 \arrow[r] \& #1 \arrow[r, "#4"] \& #2 \arrow[r, "#5"] \& #3 \arrow[r] \& 0
+	\end{tikzcd}%
+}
+\newcommand{\simeqw}{\stackrel{\mathcal{\normalfont\mbox{w}}}{\simeq}}
+\newcommand{\id}{\textbf{1}}
+\newcommand{\idmap}{\text{id}}
+\newcommand{\realproj}{\mathbb{R} \text{P}}
+\newcommand{\rank}{\text{rank} \:}
+\newcommand{\grd}{\bullet}
+\newcommand{\im}{\text{Im} \:}
+\newcommand{\coker}{\text{coker} \:}
+\newcommand{\CW}{\text{CW}}
+\newcommand{\redhom}[1]{\widetilde{#1}}
+\newcommand{\interior}[1]{\text{int}(#1)}
+\newcommand{\inv}[1]{\overline{#1}}
+
+\begin{document}
+
+	\begin{titlepage}
+		\centering
+		\vspace*{\baselineskip}
+		\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+		\rule{\textwidth}{0.4pt}\\[\baselineskip]
+		{\Huge Solutions to Homework \homeworkNumber \\[0.2\baselineskip]
+		for \\[0.4\baselineskip]
+		\subject\:\courseNumber: \courseName
+		}\\[0.2\baselineskip]
+		\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{3pt}
+		\rule{\textwidth}{1.6pt}\\[\baselineskip]
+		\vspace*{3\baselineskip}
+		\huge  \par
+		\vspace*{\baselineskip}
+		{\itshape \universityName \par}
+		\vspace*{3\baselineskip}
+		\huge \textbf{Author of Solutions:} { \authorName} \\
+		\vspace*{\baselineskip}
+		\huge \textbf{Instructor:} { \instructor} \\
+		\vspace*{\baselineskip}
+		\huge \textbf{Date Submitted:} { \submitDate } \par
+		\vspace*{\baselineskip}
+		\huge \textbf{Contact:} { \authorEmail} \\
+		\vspace*{\baselineskip}
+	\end{titlepage}
+	
+	\makeatletter
+	\providecommand\@dotsep{5}
+	\makeatother
+	\listoftodos\relax
+	
+	\clearpage
+	
+	This is a set of solutions, created by \authorName, to Homework \homeworkNumber\:for \subject\:\courseNumber: \courseName.
+	\hspace{0pt} \\
+
+	\section*{Notation:}
+	To avoid any possible ambiguity or confusion, we make special note of our use of the following notation:
+	\begin{itemize}
+		\item Let $\mathbb{Z}_+$ denote the set of positive integers.
+		\item Given two paths $f$ and $g$, let $f \sim g$ suggest that $f$ is homotopic to $g$ (and vice versa.)
+		\item Let $\textbf{1}$ denote the group identity element (unless specified otherwise.)
+		\item For two groups $G$ and $H$, let $G \cong H$ denote $G$ being isomorphic to $H$.
+		\item We frequently represent the fact that two groups (spaces) are isomorphic (homeomorphic) by equality.
+		\item For $x \in \mathbb{R}^n$ and $\gamma \in \mathbb{R}$, let $x \preceq \gamma$ denote $x_i \leq \gamma$ for $i = 1, \dots, n$, and define $\prec$, $\succ$, and $\succeq$ analogously.
+		\item For any set $X$, let $\interior{X}$ denote the interior of the set $X$.
+		\item For any loop (path) $\gamma$, let $\inv{\gamma}$ represent the inverse loop (path).  I.e., $\inv{\gamma} = \gamma^{-1}$.
+	\end{itemize}
+	
+	\section*{Acknowledgments:}
+	Thank you to the following people for helping me, in some way, with these solutions:
+	\begin{itemize}
+		\item Allen Hatcher, whose Algebraic Topology textbook, \cite{hatcher01}, is awesome.
+	\end{itemize}
+	
+
+	\clearpage
+	
+	\section*{Exercise 1}
+	\stepcounter{section}
+	
+	The mapping torus $T_f$ of a map $f: X \to X$ is the quotient $X \times I$
+	$$T_f = \frac{X \times I}{(x,0) \sim (f(x),1)}.$$
+	Let $A$ and $B$ be copies of $S^1$, let $X = A \vee B$, and let $p$ be the wedge point of $X$.  Let $f: X \to X$ be a map that satisfies $f(p) = p$, carries $A$ into $A$ by a degree-3 map, and carries $B$ into $B$ by a degree-5 map.
+	
+	\begin{enumerate}[(a)]
+		\item Equip $T_f$ with a CW structure by attaching cells to $X \vee S^1$.
+		\item Compute a presentation of $\pi_1(T_f)$. 
+		\item Compute $H_1(T_f,K)$.
+	\end{enumerate}
+	
+	\begin{proof}
+		
+		\begin{enumerate}[(a)]
+			\item Let $X = S^1 \vee S^1$.  In the typical, explicit formulation of the mapping torus, we would have
+			$$T_f = \frac{(S^1 \vee S^1) \times I}{(x,0) \sim (f(x),1)}.$$
+			I.e., $S^1 \vee S^1 \times \{0\}$ is identified with $S^1 \vee S^1 \times \{1\}$.  Given that $f$ preserves the basepoint $p$, this identification can be seen as a loop homeomorphic to $S^1$ attached to $S^1 \vee S^1$ at $p$, yielding $X \vee S^1 \subset T_f$.
+			
+			Now, note that $X \vee S^1$ is generated by the loops $a,b,c$, with $c$ being the loop of the newly wedged copy of $S^1$.  The mapping torus can be formed by attaching a 2-cell around the path $a c \inv{f}_*(a) \inv{c}$ and attaching a 2-cell around the path $b c \inv{f}_*(b) \inv{c}$.
+			
+			\unfinished{Include a representative picture here?}
+			\item Given that
+			$$\pi_1(X \vee S^1) = \pi_1(S^1 \vee S^1 \vee S^1) = \langle a,b,c \rangle,$$
+			by Proposition 1.26 of \cite{hatcher01}, we have that
+			$$\pi_1(T_f) = \langle a,b,c \suchthat a c \inv{f}_*(a) \inv{c}, \: b c \inv{f}_*(b) \inv{c}\rangle.$$
+			\item Let $H_1(T_f)$ denote $H_1(T_f,K)$ in the following argument.  Note that we have established that $T_f$ has the following CW structure:  one 0-cell (the basepoint wedge point of $X$, $p$), three 1-cells $\{a,b,c\}$, and two 2-cells attached by the words $a c \inv{f}_*(a) \inv{c}$ and $b c \inv{f}_*(b) \inv{c}$.  Recall that a cellular chain complex of a CW complex $X$ is given by
+			$$\begin{tikzcd}
+			\cdots \arrow[r] & H_{n+1}(X^{n+1},X^n) \arrow[r, "d_{n+1}"] & H_n(X^n,X^{n-1}) \arrow[r, "d_n"] & H_{n-1}(X^{n-1},X^{n-2}) \arrow[r] & \cdots
+			\end{tikzcd}$$
+			Moreover, via Lemma 2.34 of \cite{hatcher01}, we have the following diagram
+			$$\begin{tikzcd}[column sep=tiny]
+			& [1.5em] & & & 0 & & [1.5em] \\
+			& 0 \arrow[dr] & & H_n(X^{n+1}) \cong H_n(X) \arrow[ur] & & & \\
+			& & H_n(X^n) \arrow[ur] \arrow[dr, "j_n"] & & & & \\
+			\cdots \arrow[r] & H_{n+1}(X^{n+1},X^n) \arrow[ur, "\partial_{n+1}"] \arrow[rr, "d_{n+1}"] & & H_n(X^n,X^{n-1}) \arrow[rr, "d_n"] \arrow[dr, "\partial_n"] & & H_{n-1}(X^{n-1},X^{n-2}) \arrow[r] & \cdots \\
+			& & & & H_{n-1}(X^{n-1}) \arrow[ur, "j_{n-1}"] & & \\
+			& & & 0 \arrow[ur] & & &
+			\end{tikzcd}$$
+			By this diagram and Theorem 2.35 of \cite{hatcher01}, we have that
+			$$H_n(X) \cong \ker d_n / \im d_{n+1}.$$
+			
+			This suggests that our particular area of interest in this cellular chain complex is
+			$$\begin{tikzcd}
+			\cdots \arrow[r] & H_3(X^3,X^2) \arrow[r, "d_3"] & H_2(X^2,X^1) \arrow[r, "d_2"] & H_1(X^1,X^0) \arrow[r, "d_1"] & H_0(X^0) \arrow[r, "d_0"] & 0
+			\end{tikzcd}$$
+			If we are able to compute $\ker d_1$ and $\im d_2$, we will have $H_1(X)$.
+			
+			By our construction of a CW complex for $T_f$, we have that $T_f$ has one 0-cell, three 1-cells, and two 2-cells, and given that $\mathcal{C}_n = H_n(X^n, X^{n-1}) = \mathbb{Z}^{\text{\# } n \text{-cells}}$, we have that the cellular chain complex of $T_f$ is
+			$$\begin{tikzcd}
+			0 \arrow[r] & \mathbb{Z}^2 \arrow[r, "d_2"] & \mathbb{Z}^3 \arrow[r, "d_1"] & \mathbb{Z} \arrow[r] & 0
+			\end{tikzcd}$$
+			where $H_3(X^3,X^2) = 0$ because $X$ has an empty $k$-skeleton for $k > 2$.  We clearly have that $T_f$ is connected and only has one 0-cell, which suggests that $d_1 = 0$, hence $\ker d_1 = \mathbb{Z}^3$.  Therefore, all that remains is to calculate $d_2$.
+			
+			By the Cellular Boundary Formula,
+			$$d_n(e_\alpha^n) = \sum_\beta d_{\alpha \beta} e_\beta^{n-1}$$
+			where $d_{\alpha \beta}$ is the degree of the map $S_\alpha^{n-1} \to X^{n-1} \to S_\beta^{n-1}$ that is the composition of the attaching map of $e_\alpha^n$ with the quotient map collapsing $X^{n-1} - e_\beta^{n-1}$ to a point.  Let $e_a^1$, $e_b^1$, and $e_c^1$ denote the 1-cells corresponding to the loop $a$, $b$, and $c$, respectively.  Let $e_1^2$ denote the 2-cell attached around the path $a c \inv{f}_*(a) \inv{c}$ and let $e_2^2$ denote the 2-cell attached around the path $b c \inv{f}_*(b) \inv{c}$.  Then we have that
+			\begin{align*}
+			d_2(e_1^2) & = \sum_\beta d_{1 \beta} \cdot e_\beta^1 \\
+			& = d_{1 a} \cdot e_a^1 + d_{1 b} \cdot e_b^1 + d_{1 c} \cdot e_c^1 \\
+			& = (a - f_*(a)) + (0) + (c - c) \\
+			& = a - f_*(a) \\
+			& = a - 3 \cdot a \\
+			& = -2 a
+			\end{align*}
+			by the fact that $f$ carries $A$ into $A$ by a degree-3 map.  Proceeding similarly for the other 2-cell, we have that
+			\begin{align*}
+			d_2(e_2^2) & = \sum_\beta d_{2 \beta} \cdot e_\beta^1 \\
+			& = d_{2 a} \cdot e_a^1 + d_{2 b} \cdot e_b^1 + d_{2 c} \cdot e_c^1 \\
+			& = (0) + (b - f_*(b)) + (c - c) \\
+			& = b - f_*(b) \\
+			& = b - 5 \cdot b \\
+			& = -4 b
+			\end{align*}
+			by the fact that $f$ carries $B$ into $B$ by a degree-5 map.
+			
+			Therefore, we have that
+			$$d(\id) = \begin{bmatrix}
+			-2 \\
+			-4 \\
+			0
+			\end{bmatrix}$$
+			hence
+			$$\im d = (-2) \mathbb{Z} \times (-4) \mathbb{Z} \times \{\id\} = 2 \mathbb{Z} \times 4\mathbb{Z} \times \{\id\}.$$
+			Therefore,
+			$$H_1(T_f) = \mathbb{Z}^3 / 2 \mathbb{Z} \times 4 \mathbb{Z} \times \{\id\} = \mathbb{Z} / 2\mathbb{Z} \oplus \mathbb{Z} / 4\mathbb{Z} \oplus \mathbb{Z} = \mathbb{Z}_2 \oplus \mathbb{Z}_4 \oplus \mathbb{Z}.$$
+			
+			\textbf{Note:}
+			
+			This could also be seen by considering an exact sequence similar to the Mayer-Vietoris sequence, namely
+			$$\begin{tikzcd}
+			\cdots \arrow[r] & H_n(X) \arrow[r, "\id - f_*"] & H_n(X) \arrow[r, "\iota_*"] & H_n(T_f) \arrow[r] & H_{n-1}(X) \arrow[r] & \cdots
+			\end{tikzcd}$$
+			with $\iota: X \hookrightarrow T_f$ being the inclusion.  The derivation of a more general form of this exact sequence is given in Example 2.48 of \cite{hatcher01}, with this explicit exact sequence given in Exercise 2.2.30 of \cite{hatcher01}.
+			
+			\detail{Delete this note, or maybe include more detail about alternative method?}
+			
+			By Corollary 2.25 of \cite{hatcher01}, we have that
+			$$H_n(X) = H_n(A \vee B) \cong H_n(A) \oplus H_n(B)$$
+			for $n > 0$, which, when coupled with the facts that $H_n(S^1) = 0$ for $n > 1$ and $H_2(T_f) = 0$, gives us the exact sequence
+			$$\begin{tikzcd}
+			0 \arrow[r] & H_1(A) \oplus H_1(B) \arrow[r, "\id - f_*"] \arrow[d, "\cong"] & H_1(A) \oplus H_1(B) \arrow[r, "\iota_*"] \arrow[d, "\cong"] & H_1(T_f) \arrow[r] & H_0(A \vee B) \arrow[r, "\id - f_*"] \arrow[d, "\cong"] & H_0(A \vee B) \arrow[r] \arrow[d, "\cong"] & 0 \\
+			& \mathbb{Z} \oplus \mathbb{Z} \arrow[r, "\id - f_*"] & \mathbb{Z} \oplus \mathbb{Z} & & \mathbb{Z} \arrow[r, "\id - f_*"] & \mathbb{Z} &
+			\end{tikzcd}$$
+			Since $f$ takes $A$ into $A$ by a degree-3 map and takes $B$ into $B$ by a degree-5 map, we have that
+			$$\begin{tikzcd}
+			0 \arrow[r] & H_1(A) \oplus H_1(B) \arrow[r, "-2 \text{ on } A", "-4 \text{ on } B" below] \arrow[d, "\cong"] & H_1(A) \oplus H_1(B) \arrow[r, "\iota_*"] \arrow[d, "\cong"] & H_1(T_f) \arrow[r] & H_0(A \vee B) \arrow[r, "0"] \arrow[d, "\cong"] & H_0(A \vee B) \arrow[r] \arrow[d, "\cong"] & 0 \\
+			& \mathbb{Z} \oplus \mathbb{Z} \arrow[r, "-2 \text{ on } A", "-4 \text{ on } B" below] & \mathbb{Z} \oplus \mathbb{Z} & & \mathbb{Z} \arrow[r, "0"] & \mathbb{Z} &
+			\end{tikzcd}$$
+			This gives us the exact sequence
+			$$\begin{tikzcd}
+			0 \arrow[r] & \mathbb{Z}_2 \oplus \mathbb{Z}_4 \arrow[r] & H_1(T_f) \arrow[r] & \mathbb{Z} \arrow[r] & 0
+			\end{tikzcd}$$
+			Given that $\mathbb{Z}$ is free, we have that this exact sequence splits. Therefore, bv the Splitting Lemma, we have that
+			$$H_1(T_f) = \mathbb{Z}_2 \oplus \mathbb{Z}_4 \oplus \mathbb{Z}.$$
+			\insertref{Should we cite the Splitting Lemma from the text?}
+		\end{enumerate}
+		
+	\end{proof}
+	
+	\clearpage
+	
+	\section*{Exercise 2}
+	\stepcounter{section}
+	
+	Use Mayer-Vietoris to compute the degree of the suspension $\Sigma f$ of a map $f: S^n \to S^n$.
+	
+	\begin{proof}
+		
+		Let
+		$$A = (S^n \times I) / (S^n \times 1), \hspace{6mm} B = (S^n \times I) / (S^n \times 0).$$
+		I.e., $A$ is the upper cone of $S^{n+1}$ and $B$ is the lower cone of $S^{n+1}$.  Therefore, $A, B \subset S^{n+1}$, $S^{n+1} = \interior{A} \cup \interior{B}$, and $S^n = A \cap B$.  We therefore have the reduced Mayer-Vietoris sequence
+		$$\begin{tikzcd}
+		\cdots \arrow[r] & \redhom{H}_{n+1}(S^n) \arrow[r, "\Phi"] & \redhom{H}_{n+1}(A) \oplus \redhom{H}_{n+1}(B) \arrow[r, "\Psi"] & \redhom{H}_{n+1}(S^{n+1}) \arrow[r, "\partial"] & \redhom{H}_n(S^n) \arrow[r] & \cdots
+		\end{tikzcd}$$
+		Since $A$ and $B$ are both contractible, we have that
+		$$\redhom{H}_i(A) \oplus \redhom{H}_i(B) \cong 0$$
+		for $i = 0, \dots, n$.  Letting $\partial = \partial_{n+1}$, the above reduced Mayer-Vietoris sequence is equivalent to the exact sequence
+		$$\begin{tikzcd}
+		\cdots \arrow[r, "\Phi_{n+1}"] & 0 \arrow[r, "\Psi_{n+1}"] & \redhom{H}_{n+1}(S^{n+1}) \arrow[r, "\partial"] & \redhom{H}_n(S^n) \arrow[r, "\Phi_n"] & 0 \arrow[r, "\Psi_n"] & \cdots
+		\end{tikzcd}$$
+		Therefore, by (iii) on page 114 of \cite{hatcher01}, we have that $\partial$ is an isomorphism hence $\redhom{H}_{n+1}(S^{n+1}) \cong \redhom{H}_n(S^n)$.
+		
+		Note that $f$ induces a map $Af: (A, S^n) \to (A, S^n)$ with quotient $\Sigma f: (A, S^n) \to (A/S^n,S^n/S^n)$.  Given that $S^n \subset A$ and there clearly exists a neighborhood $U$ of $S^n$ in $A$ that deformation retracts onto $S^n$, by Proposition 2.22 of \cite{hatcher01} we have that $\redhom{H}_{n+1}(A, S^n) \cong \redhom{H}_{n+1}(A / S^n)$.
+		
+		We therefore have the following $(A,S^n)$ pair long exact sequence:
+		$$\begin{tikzcd}
+		\cdots \arrow[r] & \redhom{H}_{n+1}(S^n) \arrow[r, "\iota_*"] & \redhom{H}_{n+1}(A) \arrow[r, "(\Sigma f)_*"] & \redhom{H}_{n+1}(A, S^n) \arrow[r, "\partial"] & \redhom{H}_n(S^n) \arrow[r, "\iota_*"] & \redhom{H}_{n}(A) \arrow[r] & \cdots
+		\end{tikzcd}$$
+		Given that $\redhom{H}_{n+1}(A,S^n) \cong \redhom{H}_{n+1}(A / S^n)$ and by the contractibility of $A$, this is equivalent to the exact sequence
+		$$\begin{tikzcd}
+		\cdots \arrow[r, "\iota_*"] & 0 \arrow[r, "(\Sigma f)_*"] & \redhom{H}_{n+1}(A / S^n) \arrow[r, "\partial"] & \redhom{H}_n(S^n) \arrow[r, "\iota_*"] & 0 \arrow[r] & \cdots
+		\end{tikzcd}$$
+		hence $\redhom{H}_{n+1}(A/S^n) \cong \redhom{H}_n(S^n)$ by the boundary map $\partial$.  Moreover, $A / S^n \cong S^{n+1}$, which suggests that $\redhom{H}_{n+1} (A/S^n) \cong \redhom{H}_{n+1}(S^{n+1})$.  By this and the naturality of the boundary maps in the $(A,S^n)$ pair long exact sequence, we have the following commutative diagram:
+		$$\begin{tikzcd}
+		\redhom{H}_{n+1}(S^{n+1}) \arrow[d, "(\Sigma f)_*" left] \arrow[r, "\partial", "\cong" below] & \redhom{H}_n(S^n) \arrow[d, "f_*"] \\
+		\redhom{H}_{n+1}(S^{n+1}) \arrow[r, "\cong" above, "\partial" below] & \redhom{H}_n(S^n)
+		\end{tikzcd}$$
+		Hence we have that if $f_*$ is multiplication by $d$, then $(\Sigma f)_*$ is multiplication by $d$.  Therefore, $\deg \Sigma f = \deg f$.
+		
+		\argcheck{Did this a long time ago, should probably double-check to see if this argument is correct!}
+		
+	\end{proof}
+	
+	\clearpage
+
+	% Alpha bibliography style.  Make second argument to thebigliography environment the largest largest explicit label used.
+	\begin{thebibliography}{"Hatcher01"}
+		\bibitem{hatcher01}
+		Allen Hatcher,
+		\emph{Algebraic Topology},
+		Cambridge University Press,
+		1st Edition,
+		2001.	
+	\end{thebibliography}
+
+\end{document}

@@ -1,12 +1,13 @@
 \documentclass[twoside, titlepage]{amsart}
 
+% Insert your details here!
 \newcommand{\authorName}{Clark Zinzow}  % Author's name.
 \newcommand{\homeworkNumber}{1}  % Homework number.
-\newcommand{\subject}{Math}  % Subject.
-\newcommand{\courseNumber}{999}  % Course number.
+\newcommand{\subject}{Subject}  % Subject.
+\newcommand{\courseNumber}{101}  % Course number.
 \newcommand{\courseName}{Introduction to Intermediate}  % Course name.
 \newcommand{\instructor}{Professor Professorson}  % Name of lecturer.
-\newcommand{\submitDate}{\today}  % Date solutions submitted.
+\newcommand{\submitDate}{\today}  % Date solutions last edited.
 \newcommand{\universityName}{University of Wisconsin-Madison}  % University.
 \newcommand{\authorEmail}{czinzow@wisc.edu}  % Author's e-mail.
 
@@ -79,6 +80,7 @@
 }
 \makeatother
 
+% Packages
 \usepackage{mathrsfs}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{enumerate}
@@ -87,20 +89,22 @@
 \usepackage[section]{placeins}
 \usepackage{array}
 \usepackage{nicefrac}
-\usepackage{listings}
 \usepackage{parskip}
 \usepackage{graphicx}  % Note:  Use \afterpage{\clearpage} to flush all
 %        processed floats, not \clearpage.
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage{tikz-cd}
 \usepackage{fancyhdr}
-\usepackage{bm}
 \usepackage{dsfont}
 \usepackage{mdwlist}
 \usepackage{underscore}
 \usepackage[colorlinks=true, citecolor=red, urlcolor=blue]{hyperref}
 
-% Todo notes commands.
+% Subject specific packages
+% \usepackage{tikz-cd}  % Great for commutative diagrams.
+% \usepackage{bm}  % Great for bold vectors.
+% \usepackage{listings}  % Great for source code.
+
+% Todo notes commands, color-coded to type of todo.
 \newcommand{\unfinished}[1]{\todo[inline, color=red!40]{#1}}
 \newcommand{\argcheck}[1]{\todo[inline, color=orange!40]{#1}}
 \newcommand{\needprove}[1]{\todo[inline, color=violet!40]{#1}}
@@ -109,47 +113,27 @@
 \newcommand{\badnotation}[1]{\todo[inline, color=yellow!40]{#1}}
 \newcommand{\further}[1]{\todo[inline, color=cyan!40]{#1}}
 
-
-\newcommand{\morph}{\longrightarrow}
-\newcommand{\lmorph}{\longleftarrow}
-\newcommand{\morpha}[1]{\overset{#1}{\morph}}
-\newcommand{\lmorpha}[1]{\overset{#1}{\lmorph}}
-\newcommand{\ses}[3]{%
-	\begin{tikzcd}[ampersand replacement=\&]
-		0 \arrow[r] \& #1 \arrow[r] \& #2 \arrow[r] \& #3 \arrow[r] \& 0
-	\end{tikzcd}%
-}
-\newcommand{\sesm}[5]{%
-	\begin{tikzcd}[ampersand replacement=\&]
-		0 \arrow[r] \& #1 \arrow[r, "#4"] \& #2 \arrow[r, "#5"] \& #3 \arrow[r] \& 0
-	\end{tikzcd}%
-}
+% Such that symbol command.
 \newcommand{\suchthat}{\: \big\rvert \:}
 \newcommand{\suchthatBig}{\: \Big\rvert \:}
 \newcommand{\suchthathuge}{\: \huge\rvert \:}
-\renewcommand{\Re}{\operatorname{Re}}
-\renewcommand{\Im}{\operatorname{Im}}
-\DeclareMathOperator*{\prob}{Pr}
 
 % Subject specific commands.
 
-
-
-
-% Book specific commands.
-
-
+%\renewcommand{\Re}{\operatorname{Re}}
+%\renewcommand{\Im}{\operatorname{Im}}
+%\DeclareMathOperator*{\prob}{Pr}
 
 \begin{document}
-
+	
 	\begin{titlepage}
 		\centering
 		\vspace*{\baselineskip}
 		\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
 		\rule{\textwidth}{0.4pt}\\[\baselineskip]
 		{\Huge Solutions to Homework \homeworkNumber \\[0.2\baselineskip]
-		for \\[0.4\baselineskip]
-		\subject\:\courseNumber: \courseName
+			for \\[0.4\baselineskip]
+			\subject\:\courseNumber: \courseName
 		}\\[0.2\baselineskip]
 		\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{3pt}
 		\rule{\textwidth}{1.6pt}\\[\baselineskip]
@@ -158,21 +142,28 @@
 		\vspace*{\baselineskip}
 		{\itshape \universityName \par}
 		\vspace*{3\baselineskip}
-		\huge \textbf{Author of Solutions:} { \authorName} \\
+		\huge \textbf{Author of Solutions:} { \authorName } \\
 		\vspace*{\baselineskip}
-		\huge \textbf{Instructor:} { \instructor} \\
+		\huge \textbf{Instructor:} { \instructor } \\
 		\vspace*{\baselineskip}
-		\huge \textbf{Submit Date:} { \submitDate } \\
+		\huge \textbf{Date Submitted:} { \submitDate } \par
 		\vspace*{\baselineskip}
-		\huge \textbf{Contact:} { \authorEmail} \\
+		\huge \textbf{Contact:} { \authorEmail } \\
 		\vspace*{\baselineskip}
 	\end{titlepage}
 	
+	\makeatletter
+	\providecommand\@dotsep{5}
+	\makeatother
+	\listoftodos\relax
+	
+	\clearpage
+	
 	This is a set of solutions, created by \authorName, to Homework \homeworkNumber\:for \subject\:\courseNumber: \courseName.
 	\hspace{0pt} \\
-
+	
 	\section*{Notation:}
-	We use the following non-standard notation:
+	To avoid any possible ambiguity or confusion, we make special note of our use of the following notation:
 	\begin{itemize}
 		\item 
 	\end{itemize}
@@ -183,30 +174,29 @@
 		\item 
 	\end{itemize}
 	
-
-\clearpage
-
-\section*{Exercise 1}
-\stepcounter{section}
-
+	\clearpage
 	
-
-\begin{proof}
+	\section*{Exercise 1}
+	\stepcounter{section}
 	
+		
 	
+	\begin{proof}
+		
+		
+		
+	\end{proof}
 	
-\end{proof}
-
-\clearpage
-
+	\clearpage
+	
 	% Alpha bibliography style.  Make second argument to thebigliography environment the largest largest explicit label used.
-	\begin{thebibliography}{"Fol99"}
-		\bibitem[Fol99]{folland99}
-		Gerald B. Folland,
-		\emph{Real Analysis: Modern Techniques and Their Applications},
-		Wiley,
-		2nd Edition,
-		1999.	
+	\begin{thebibliography}{"McAuthorface16"}
+		\bibitem{realbook16}
+			Writey McAuthorface,
+			\emph{Introduction to Advanced Intermediate: For Beginning Experts},
+			Publishy McPressface,
+			10th Edition,
+			2016.
 	\end{thebibliography}
-
+	
 \end{document}
